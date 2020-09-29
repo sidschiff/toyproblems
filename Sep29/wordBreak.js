@@ -52,20 +52,23 @@ var wordBreak = function (s, wordDict) {
       }
     }
     if (count < dict.length) {
+      count++
       if (origWord.length > currentWord.length) {
-        //restart
-        count++
+        // restart with current word
         return searchDict(currentWord, dict)
+      } else {
+        return searchDict(origWord, dict, count)
       }
-    } else {
-      // console.log('false')
-      return false
     }
+      // console.log('false')
+    return false
   }
 
-  searchDict(s, wordDict)
+  return searchDict(s, wordDict, 0)
 };
 
 console.log('true: ', wordBreak('codeleet', ['leet', 'code']))
 console.log('true: ', wordBreak("applepenapple", ["apple", "pen"]))
 console.log('false: ', wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"]))
+console.log('false: ', wordBreak('a', ['b']))
+console.log('true: ', wordBreak('cars', ['car', 'ca', 'rs']))
